@@ -1,30 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import athlete from "../img/athlete-small.png";
 import theracer from "../img/theracer-small.png";
 import goodtimes from "../img/goodtimes-small.png";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { MovieState } from "./MovieState";
+
 const OurWork = () => {
+  const [movies, setMovies] = useState(MovieState);
+
   return (
     <Work>
-      <Movie>
-        <h2>the athlete</h2>
-        <Link>
-          <img src={athlete} alt="" />
-        </Link>
-      </Movie>
-      <Movie>
-        <h2>the racer</h2>
-        <Link>
-          <img src={theracer} alt="" />
-        </Link>
-      </Movie>
-      <Movie>
-        <h2>good times</h2>
-        <Link>
-          <img src={goodtimes} alt="" />
-        </Link>
-      </Movie>
+      {movies.map((movie) => (
+        <>
+          <Movie id={movie.id}>
+            <h2>{movie.title}</h2>
+            <Link to={{ pathname: movie.url }}>
+              <img src={movie.mainImg} alt="" />
+            </Link>
+          </Movie>
+        </>
+      ))}
     </Work>
   );
 };
